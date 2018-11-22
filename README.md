@@ -2,7 +2,10 @@
 pongo2 packr loader
 
 ```
-import "github.com/wbsifan/pongo2-packr"
+import (
+	"github.com/gobuffalo/packr/v2"
+	"github.com/wbsifan/pongo2-packr"
+)
 
 // then
 box := packr.New("template", "../template")
