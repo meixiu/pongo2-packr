@@ -1,8 +1,9 @@
-package packrloader
+package pongo2packr
 
 import (
 	"bytes"
 	"io"
+	"path/filepath"
 
 	"github.com/gobuffalo/packr/v2"
 )
@@ -14,9 +15,17 @@ type (
 	}
 )
 
+func NewLoader(box *packr.Box) *Loader {
+	return &Loader{box}
+}
+
 // Abs returns the absolute path to a template file.
 func (this *Loader) Abs(base, name string) string {
-	return name
+	if filepath.IsAbs(name) {
+		return name
+	}
+	p := filepath.Join(filepath.Dir(base), name)
+	return p
 }
 
 // Get retrieves a reader for the specified path.
